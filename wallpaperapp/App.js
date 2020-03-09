@@ -9,10 +9,11 @@ import {
   Dimensions,
   Animated,
   TouchableOpacity,
+  Share,
   TouchableWithoutFeedback
 } from 'react-native';
 import axios from 'axios'
-import CameraRoll from 'react-native-cameraroll'
+import CameraRoll from "@react-native-community/cameraroll";
 import {Ionicons} from '@expo/vector-icons' 
 import * as Permissions from 'expo-permissions'
 import * as FileSystem from 'expo-file-system'
@@ -38,6 +39,12 @@ export default class App extends React.Component{
     this.actionbarY = this.state.scale.interpolate({
       inputRange: [0.9, 1],
       outputRange: [0, -80]
+    })
+
+
+    this.borderRadius = this.state.scale.interpolate({
+      inputRange: [0.9, 1],
+      outputRange: [30, 0]
     })
 
   }
@@ -80,6 +87,16 @@ export default class App extends React.Component{
     this.loadWallpapers()
   }
 
+  shareWallpaper = async (image) => {
+    try {
+      await Share.share({
+        message: 'Checkout this wallpaper ' + image.urls.full
+      })
+    } catch (error) {
+      console.log(error)
+    }
+  }
+
 
   saveToCameraRoll = async image => {
     let cameraPermissions = await Permissions.getAsync(Permissions.CAMERA_ROLL);
@@ -93,6 +110,7 @@ export default class App extends React.Component{
         FileSystem.documentDirectory + image.id + '.jpg'
       )
         .then(({ uri }) => {
+          console.log(uri)
           CameraRoll.saveToCameraRoll(uri);
           alert('Saved to photos');
         })
@@ -115,7 +133,7 @@ export default class App extends React.Component{
         </View>
         <TouchableWithoutFeedback onPress={() => this.showControls(item)}>
           <Animated.View style={[{ width, height}, this.scale]}>
-            <Image source={{ uri: item.urls.regular }} style={{ width: null, height: null, flex: 1}} resizeMode="cover"  />
+            <Animated.Image source={{ uri: item.urls.regular }} style={{ width: null, height: null, flex: 1, borderRadius: this.borderRadius}} resizeMode="cover"  />
           </Animated.View>
         </TouchableWithoutFeedback>
         
@@ -135,7 +153,7 @@ export default class App extends React.Component{
 
 
             <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-              <TouchableOpacity activeOpacity={0.5} onPress={() => alert('load image')}>
+              <TouchableOpacity activeOpacity={0.5} onPress={() => this.shareWallpaper(item)}>
                 <Ionicons name="ios-share" color="white" size={40} />
               </TouchableOpacity>
             </View>
