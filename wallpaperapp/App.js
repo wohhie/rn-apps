@@ -130,6 +130,7 @@ export default class App extends React.Component{
       <View style={{ flex: 1}}>
         <View style={styles.loadingIndicator}>
           <ActivityIndicator size="large" color="grey" />
+          
         </View>
         <TouchableWithoutFeedback onPress={() => this.showControls(item)}>
           <Animated.View style={[{ width, height}, this.scale]}>
