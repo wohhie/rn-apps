@@ -1,3 +1,10 @@
+# REACT NATIVE APPLICATIONS
+
+All of my developed application by React-Native for practice and learning purpose.
+
+## Getting Started
+
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 # rn-apps
 ## All of the React-Native Application
 
