@@ -9,8 +9,6 @@ import {
 
 import DateTimePicker from '@react-native-community/datetimepicker'
 
-
-
 const Home = () => {
 
     const [date, setDate] = useState(new Date(1598051730000));
