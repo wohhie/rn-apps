@@ -26,7 +26,11 @@ const DATA = [
 
 
 function Item({ title }){
-    
+    return (
+        <View style={styles.item}>
+            <Text style={styles.title}>{title}</Text>
+        </View>
+    )
 }
 
 
@@ -38,6 +42,11 @@ class FlatList extends Component {
             <SafeAreaView style={styles.container}>
                 <FlatList 
                     data={DATA}
+                    renderItem={({item}) => 
+                        <Item title={item.title} />
+                    }
+
+                    keyExtractor={item => item.id}
                 />
             </SafeAreaView>
         );
