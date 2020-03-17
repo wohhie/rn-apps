@@ -2,15 +2,44 @@ import React, { Component } from "react";
 import { 
     View,
     Text,
+    SafeAreaView,
+    FlatList,
     StyleSheet
 } from "react-native";
+
+
+// inserting some data information
+const DATA = [
+    {
+        id: 'bd7acbea',
+        title: 'First Item'
+    },
+    {
+        id: '3ac68afc',
+        title: 'Second Item',
+    },
+    {
+        id: '58694a0f',
+        title: 'Third Item'
+    }
+]
+
+
+function Item({ title }){
+    
+}
+
+
+
 
 class FlatList extends Component {
     render() {
         return (
-            <View style={styles.container}>
-                <Text>FlatList</Text>
-            </View>
+            <SafeAreaView style={styles.container}>
+                <FlatList 
+                    data={DATA}
+                />
+            </SafeAreaView>
         );
     }
 }
